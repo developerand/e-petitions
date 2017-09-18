@@ -1066,7 +1066,8 @@ CREATE TABLE sites (
     feedback_email character varying(100) DEFAULT '"Petitions: UK Government and Parliament" <petitionscommittee@parliament.uk>'::character varying NOT NULL,
     moderate_url character varying(50) DEFAULT 'https://moderate.petition.parliament.uk'::character varying NOT NULL,
     last_petition_created_at timestamp without time zone,
-    login_timeout integer DEFAULT 1800 NOT NULL
+    login_timeout integer DEFAULT 1800 NOT NULL,
+    feature_flags jsonb DEFAULT '{}'::jsonb NOT NULL
 );
 
 
@@ -1692,6 +1693,13 @@ CREATE INDEX index_archived_petitions_on_background ON archived_petitions USING 
 
 
 --
+-- Name: index_archived_petitions_on_debate_state_and_parliament_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_archived_petitions_on_debate_state_and_parliament_id ON archived_petitions USING btree (debate_state, parliament_id);
+
+
+--
 -- Name: index_archived_petitions_on_locked_by_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1706,6 +1714,13 @@ CREATE INDEX index_archived_petitions_on_parliament_id ON archived_petitions USI
 
 
 --
+-- Name: index_archived_petitions_on_response_at_and_parliament_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_archived_petitions_on_response_at_and_parliament_id ON archived_petitions USING btree (government_response_at, parliament_id);
+
+
+--
 -- Name: index_archived_petitions_on_signature_count; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
@@ -1717,6 +1732,13 @@ CREATE INDEX index_archived_petitions_on_signature_count ON archived_petitions U
 --
 
 CREATE INDEX index_archived_petitions_on_state_and_closed_at ON archived_petitions USING btree (state, closed_at);
+
+
+--
+-- Name: index_archived_petitions_on_state_and_parliament_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
+--
+
+CREATE INDEX index_archived_petitions_on_state_and_parliament_id ON archived_petitions USING btree (state, parliament_id);
 
 
 --
@@ -2586,4 +2608,6 @@ INSERT INTO schema_migrations (version) VALUES ('20170906203439');
 INSERT INTO schema_migrations (version) VALUES ('20170909092251');
 
 INSERT INTO schema_migrations (version) VALUES ('20170909095357');
+
+INSERT INTO schema_migrations (version) VALUES ('20170915102120');
 
