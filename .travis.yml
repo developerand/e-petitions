@@ -27,8 +27,19 @@ before_script:
 - bundle install
 - psql -c 'create database epets_test;' -U postgres
 - RAILS_ENV=test bundle exec rake db:structure:load
-script: RAILS_ENV=test bundle exec rake
+script:
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
+- RAILS_ENV=test bundle exec cucumber features/admin/moderator_responds_to_petition.feature
 after_success: bundle exec rake deploy:preview
+after_failure: cat log/*.log
 env:
   global:
   - secure: hQTk4ylIIdlGDl2fJTfbnzfjO0GZlWczkXxall0Af3NLIWlQ8ILyigsopJJMdOOhHk+uTkfmdYTShNcpyXi81HiTjf6uVySvJJm6zwTz9EYGM4qpu+Xlo+2JYCMYWxGlnu3dHcn59s4hf+zh5Ok7BjYRqQA2d0q0wcrtVD2WqSc=
